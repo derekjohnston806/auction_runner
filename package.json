@@ -1,0 +1,19 @@
+{
+  "name": "auction_runner",
+  "version": "1.0.0",
+  "description": "An experimental version of Auctioneer. This application should let users create, manage, and run live auction events.",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/derekjohnston806/auction_runner.git"
+  },
+  "author": "Derek Johnston",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/derekjohnston806/auction_runner/issues"
+  },
+  "homepage": "https://github.com/derekjohnston806/auction_runner#readme"
+}
