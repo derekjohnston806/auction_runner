@@ -1,5 +1,8 @@
 # Node.js Files
 node_modules/
 
+# Application Files
+dist/
+
 # macOS Files
 .DS_Store
