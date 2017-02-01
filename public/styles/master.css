@@ -1,0 +1,19 @@
+footer {
+  border-top: 1px solid #EEE;
+  color: #CCC;
+  padding: 21px 9px;
+  text-align: center;
+}
+header {
+  border-bottom: 1px solid #EEE;
+  padding: 21px 9px;
+}
+
+header form {
+  margin-top: 5px;
+}
+
+h1 {
+  padding: 0;
+  margin: 0;
+}

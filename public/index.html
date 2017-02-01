@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auctioneer - Auction Runner</title>
+    <link rel="stylesheet" href="styles/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/master.css" />
+  </head>
+  <body>
+    <!-- Content -->
+    <div class="container">
+      <header class="row">
+        <h1 class="col-md-7">Auctioneer</h1>
+        <form id="login-form" class="form-inline col-md-5">
+          <section class="form-group">
+            <label for="login-email" hidden="true">Email Address:</label>
+            <input type="email" id="login-email" class="form-control" placeholder="email@address.com" required="true" />
+          </section>
+          <section class="form-group">
+            <label for="login-password" hidden="true">Password:</label>
+            <input type="password" id="login-password" class="form-control" placeholder="password" required="true" />
+          </section>
+          <section class="form-group">
+            <input type="submit" value="Log In" class="form-control" />
+          </section>
+        </form>
+      </header>
+      <main>
+        <h2 class="text-center">Create an Account</h2>
+        <form id="signup-form">
+          <section id="signup-error" class="alert alert-danger" hidden="true">
+            <p><strong>Sign Up Error: </strong><span id="signup-error-message"></span></p>
+          </section>
+          <section class="form-group">
+            <label for="signup-name">Your Name</label>
+            <input type="text" id="signup-name" class="form-control" placeholder="Your Name Here..." required="true" />
+          </section>
+          <section class="form-group">
+            <label for="signup-org-name">Organization Name</label>
+            <input type="text" id="signup-org-name" class="form-control" placeholder="Org. Name" required="true" />
+          </section>
+          <section class="form-group">
+            <label for="signup-email">Email Address</label>
+            <input type="email" id="signup-email" class="form-control" placeholder="email@address.com" required="true" />
+          </section>
+          <section class="form-group">
+            <label for="signup-password">Your Password</label>
+            <input type="password" id="signup-password" class="form-control" placeholder="Your Password" required="true" />
+          </section>
+          <section class="form-group">
+            <input type="submit" value="Create Account" class="form-control" />
+          </section>
+        </form>
+      </main>
+      <footer>
+        <h5>&copy; 2017 J&P Innovations Inc.</h5>
+      </footer>
+    </div>
+    <!-- Scripts -->
+    <script src="scripts/jquery/jquery-3.1.1.min.js"></script>
+    <script src="scripts/bootstrap/bootstrap.min.js"></script>
+    <script src="scripts/forms/handleSignUpFormSubmit.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#signup-form").submit(handleSignUpFormSubmit);
+      })
+    </script>
+  </body>
+</html>
