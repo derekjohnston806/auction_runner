@@ -6,7 +6,8 @@
   @desc:
     - Handle a request form the client to create a new user account.
 */
-var admin = require("firebase-admin");
+var admin = require("firebase-admin"),
+    passwordHash = require("password-hash");
 
 module.exports = function (request, response) {
   var newUserData = request.body;
@@ -28,10 +29,20 @@ module.exports = function (request, response) {
     });
   })
   .then(function () {
+    var hash = passwordHash.generate(newUserData.password);
+    var hashedEmail = passwordHash.generate(newUserData.email);
+    newUserData.session = {
+      hash      : hash,
+      timestamp : Date.now(),
+    };
+    return admin.database().ref("sessions").child(newUserData.email.replace(/\./g, "_")).set(newUserData.session);
+  })
+  .then(function () {
     response.status(200);
     response.json({
-      uid       : newUserData.uid,
-      timestamp : Date.now()
+      hash      : newUserData.session.hash,
+      timestamp : newUserData.session.timestamp,
+      email     : newUserData.email
     });
     response.end();
   })

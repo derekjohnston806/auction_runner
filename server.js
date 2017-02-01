@@ -20,6 +20,7 @@ app.use(express.static(__dirname + "/public", {
 
 // API ROUTES
 app.post("/newUserAccount", require("./routes/newUserAccount.route"));
+app.post("/authenticateUserCredentials", require("./routes/authenticateUserCredentials.route"));
 
 app.listen(port, function () {
   console.log("Auction runner application listening on port:", port);

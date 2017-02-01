@@ -48,8 +48,9 @@ function handleSignUpFormSubmit(event) {
       data: newUserData,
       success: function (data, textStatus, xhr) {
         console.log("New user account creation succeeded with data:", data);
-        localStorage.setItem("auctioneer-uid", data.uid);
+        localStorage.setItem("auctioneer-hash", data.hash);
         localStorage.setItem("auctioneer-timestamp", data.timestamp);
+        localStorage.setItem("auctioneer-email", data.email);
         window.location.href = "dashboard";
       },
       error: function (xhr, textStatus, errorThrown) {

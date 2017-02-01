@@ -12,7 +12,7 @@
     <div class="container">
       <header class="row">
         <h1 class="col-md-7">Auctioneer</h1>
-        <form id="login-form" class="form-inline col-md-5">
+        <form id="login-form" class="form-inline col-md-5 text-right">
           <section class="form-group">
             <label for="login-email" hidden="true">Email Address:</label>
             <input type="email" id="login-email" class="form-control" placeholder="email@address.com" required="true" />
@@ -23,6 +23,9 @@
           </section>
           <section class="form-group">
             <input type="submit" value="Log In" class="form-control" />
+          </section>
+          <section id="login-error" class="alert alert-danger text-left" style="margin-left:32px; margin-top: 9px; position: absolute;" hidden="true">
+            <p><strong>Log In Error: </strong><span id="login-error-message"></span></p>
           </section>
         </form>
       </header>
@@ -61,9 +64,11 @@
     <script src="scripts/jquery/jquery-3.1.1.min.js"></script>
     <script src="scripts/bootstrap/bootstrap.min.js"></script>
     <script src="scripts/forms/handleSignUpFormSubmit.js"></script>
+    <script src="scripts/forms/handleLogInFormSubmit.js"></script>
     <script>
       $(document).ready(function () {
         $("#signup-form").submit(handleSignUpFormSubmit);
+        $("#login-form").submit(handleLogInFormSubmit);
       })
     </script>
   </body>
