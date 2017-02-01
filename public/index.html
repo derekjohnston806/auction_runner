@@ -65,10 +65,12 @@
     <script src="scripts/bootstrap/bootstrap.min.js"></script>
     <script src="scripts/forms/handleSignUpFormSubmit.js"></script>
     <script src="scripts/forms/handleLogInFormSubmit.js"></script>
+    <script src="scripts/helpers/checkForUserSession.js"></script>
     <script>
       $(document).ready(function () {
         $("#signup-form").submit(handleSignUpFormSubmit);
         $("#login-form").submit(handleLogInFormSubmit);
+        checkForUserSession();
       })
     </script>
   </body>
