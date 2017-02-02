@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auctioneer - Auction Runner</title>
+    <link rel="stylesheet" href="styles/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/master.css" />
+  </head>
+  <body>
+    <!-- CONTENT -->
+    <div class="container">
+      <header class="row">
+        <h1>Auctioneer</h1>
+      </header>
+      <main>
+        <header class="row">
+          <h2 class="col-md-7">Add an Event</h2>
+          <form id="cancel-form" class="form-inline col-md-5 text-right">
+            <a href="/dashboard">
+              <button type="button" class="form-control">
+                Cancel
+              </button>
+            </a>
+          </form>
+        </header>
+        <form id="new-event-form">
+          <section id="new-event-error" class="alert alert-danger" hidden="true">
+            <p><strong>New Event Error: </strong><span id="new-event-error-message"></span></p>
+          </section>
+          <section class="form-group">
+            <label for="new-event-name">Event Name*</label>
+            <input type="text" id="new-event-name" class="form-control" placeholder="Event Name" required="true" />
+          </section>
+          <section class="form-group">
+            <label for="new-event-location">Event Location</label>
+            <input type="text" id="new-event-location" class="form-control" placeholder="Event Location" />
+          </section>
+          <section class="form-group">
+            <label for="new-event-date">Event Date</label>
+            <input type="date" id="new-event-date" class="form-control" placeholder="mm/dd/yyyy" />
+          </section>
+          <section class="panel panel-default">
+            <header class="panel-heading">
+              Fundraising Goals
+            </header>
+            <div class="panel-body">
+              <section class="form-group">
+                <label for="new-event-goal">Primary Goal*</label>
+                <input type="text" id="new-event-goal" class="form-control" placeholder="Event Goal" required="true" />
+              </section>
+              <section class="form-group">
+                <label for="new-event-first-reach-goal">First Reach Goal</label>
+                <input type="text" id="new-event-first-reach-goal" class="form-control" placeholder="First Reach Goal" />
+              </section>
+              <section class="form-group">
+                <label for="new-event-second-reach-goal">Second Reach Goal</label>
+                <input type="text" id="new-event-second-reach-goal" class="form-control" placeholder="Second Reach Goal" />
+              </section>
+            </div>
+          </section>
+          <section class="form-group">
+            <input type="submit" value="Create New Event" class="form-control" />
+          </section>
+        </form>
+      </main>
+      <footer>
+        <h5>&copy; 2017 J&P Innovations Inc.</h5>
+      </footer>
+    </div>
+    <!-- SCRIPTS -->
+    <script src="scripts/jquery/jquery-3.1.1.min.js"></script>
+    <script src="scripts/bootstrap/bootstrap.min.js"></script>
+    <script src="scripts/forms/handleNewEventFormSubmit.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#new-event-form").submit(handleNewEventFormSubmit);
+      });
+    </script>
+  </body>
+</html>

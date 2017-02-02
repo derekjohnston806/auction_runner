@@ -34,6 +34,7 @@ module.exports = function (request, response) {
     newUserData.session = {
       hash      : hash,
       timestamp : Date.now(),
+      uid       : newUserData.uid
     };
     return admin.database().ref("sessions").child(newUserData.email.replace(/\./g, "_")).set(newUserData.session);
   })

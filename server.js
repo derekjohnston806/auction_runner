@@ -22,6 +22,8 @@ app.use(express.static(__dirname + "/public", {
 app.post("/newUserAccount", require("./routes/newUserAccount.route"));
 app.post("/authenticateUserCredentials", require("./routes/authenticateUserCredentials.route"));
 app.post("/checkForUserSession", require("./routes/checkForUserSession.route"));
+app.post("/newEvent", require("./routes/newEvent.route"));
+app.post("/events", require("./routes/events.route"));
 
 app.listen(port, function () {
   console.log("Auction runner application listening on port:", port);
