@@ -24,6 +24,7 @@ function fetchEvents() {
         "<td>{Add Participant Count}</td>" +
         "<td>" + eventData.goal + "</td>" +
         "<td>" + eventData.raised + "</td>" +
+        "<td><a href=\"event-details?eid=" + eventData.eid + "\">View Details</td>" +
         "</tr>";
 
         $("#event-table-empty").remove();

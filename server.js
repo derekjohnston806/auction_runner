@@ -24,6 +24,8 @@ app.post("/authenticateUserCredentials", require("./routes/authenticateUserCrede
 app.post("/checkForUserSession", require("./routes/checkForUserSession.route"));
 app.post("/newEvent", require("./routes/newEvent.route"));
 app.post("/events", require("./routes/events.route"));
+app.post("/eventDetails", require("./routes/eventDetails.route"));
+app.post("/addParticipantBulk", require("./routes/addParticipantBulk.route"));
 
 app.listen(port, function () {
   console.log("Auction runner application listening on port:", port);
