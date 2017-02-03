@@ -54,6 +54,20 @@ module.exports = function (request, response) {
     return admin.database().ref("events").child(bidData.eid).child("bids").child(bidData.id).update(bidParticipantData);
   })
   .then(function () {
+    return admin.database().ref("events").child(bidData.eid).once("value");
+  })
+  .then(function (snapshot) {
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      throw { code: "fetch/null_event_snapshot" };
+    }
+  })
+  .then(function (eventData) {
+    eventData.raised = Number(eventData.raised) + Number(bidData.amount);
+    return admin.database().ref("events").child(bidData.eid).set(eventData);
+  })
+  .then(function () {
     response.json({
       bidID     : bidData.id,
       bidNumber : participant.bidNumber,

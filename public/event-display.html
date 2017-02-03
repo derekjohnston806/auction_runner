@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auctioneer - Auction Runner</title>
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <link rel="stylesheet" href="styles/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/master.css" />
+    <link rel="stylesheet" href="styles/display.css" />
+  </head>
+  <body>
+    <!-- CONTENT -->
+    <div class="container-fluid">
+      <header class="row display-header">
+        <div class="col-md-5">
+          <img src="assets/demo/cis-logo.png" alt="CIS Logo" />
+        </div>
+        <div class="col-md-7">
+          <h1 id="event-name" class="text-center"></h1>
+        </div>
+      </header>
+      <main>
+        <section class="row">
+          <aside class="col-md-4 goal-bar-container">
+            <h3 class="text-center event-goal"><strong id="event-goal"></strong></h3>
+            <div class="goal-bar">
+              <div id="goal-bar-fill" class="goal-bar-fill">
+
+              </div>
+              <h3 id="event-raised" class="text-center event-raised"></h3>
+            </div>
+          </aside>
+          <section class="col-md-8">
+            <div class="row text-center bid-names">
+              <div class="bidder-first">
+                <h2 id="bidder-first-name"></h2>
+                <p id="bidder-first-amount"></p>
+              </div>
+              <div class="bidder-second">
+                <h3 id="bidder-second-name"></h3>
+                <p id="bidder-second-amount"></p>
+              </div>
+              <div class="bidder-third">
+                <h4 id="bidder-third-name"></h4>
+                <p id="bidder-third-amount"></p>
+              </div>
+              <div class="bidder-fourth">
+                <h5 id="bidder-fourth-name"></h5>
+                <p id="bidder-fourth-amount"></p>
+              </div>
+            </div>
+            <div class="row text-right event-support">
+              <img src="assets/demo/cis-support.png" alt="Event Supporter" />
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+    <!-- MODAL -->
+    <div id="name-modal" class="modal fade bidder-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog bidder-modal-dialog" role="document">
+        <div class="modal-content bidder-modal-content">
+          <div class="modal-body bidder-modal-body">
+            <h1 id="bidder-name" class="text-center bidder-name"></h1>
+            <h1 id="bidder-amount" class="text-center bidder-amount"></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- SCRIPTS -->
+    <script src="scripts/jquery/jquery-3.1.1.min.js"></script>
+    <script src="scripts/bootstrap/bootstrap.min.js"></script>
+    <script src="scripts/helpers/getParameterByName.js"></script>
+    <script src="scripts/helpers/formatDollarAmount.js"></script>
+    <script src="scripts/helpers/formatOptionalString.js"></script>
+    <script src="scripts/fetches/fetchEventDetails.js"></script>
+    <script>
+      $(document).ready(function () {
+        fetchEventDetails(function (eventDetails) {
+          $("#event-name").html(eventDetails.name);
+          $("#event-goal").html(formatDollarAmount(eventDetails.goal));
+          $("#event-raised").html(formatDollarAmount(eventDetails.raised));
+          var percent = (1 - Number(eventDetails.raised) / Number(eventDetails.goal)) * 100;
+
+          $("#goal-bar-fill").css("height", percent + "%");
+        });
+
+        $(window).bind("storage", function (event) {
+          console.log("Update Occured")
+
+          $("#bidder-name").html(localStorage.getItem("auctioneer-first-bid-name"));
+          $("#bidder-amount").html(formatDollarAmount(localStorage.getItem("auctioneer-first-bid-amount")));
+
+          $("#name-modal").modal("show");
+          setTimeout(function () { $("#name-modal").modal("hide"); }, 5000);
+
+          $("#bidder-fourth-name").html(formatOptionalString(localStorage.getItem("auctioneer-fourth-bid-name")));
+          $("#bidder-fourth-amount").html(formatDollarAmount(formatOptionalString(localStorage.getItem("auctioneer-fourth-bid-amount"))));
+          $("#bidder-third-name").html(formatOptionalString(localStorage.getItem("auctioneer-third-bid-name")));
+          $("#bidder-third-amount").html(formatDollarAmount(formatOptionalString(localStorage.getItem("auctioneer-third-bid-amount"))));
+          $("#bidder-second-name").html(formatOptionalString(localStorage.getItem("auctioneer-second-bid-name")));
+          $("#bidder-second-amount").html(formatDollarAmount(formatOptionalString(localStorage.getItem("auctioneer-second-bid-amount"))));
+          $("#bidder-first-name").html(formatOptionalString(localStorage.getItem("auctioneer-first-bid-name")));
+          $("#bidder-first-amount").html(formatDollarAmount(formatOptionalString(localStorage.getItem("auctioneer-first-bid-amount"))));
+
+          $.ajax({
+            type: "POST",
+            url: "/eventRaised",
+            data: {
+              tHash: localStorage.getItem("auctioneer-hash"),
+              tEmail: localStorage.getItem("auctioneer-email"),
+              eid: getParameterByName("eid")
+            },
+            success: function (data, textStatus, xhr) {
+              var raised = data.raised;
+              var goal = data.goal;
+              $("#event-raised").html(formatDollarAmount(raised));
+              var percent = (1 - Number(raised) / Number(goal)) * 100;
+              console.log("Percent:", percent);
+              $("#goal-bar-fill").css("height", percent + "%");
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

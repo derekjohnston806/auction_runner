@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Auctioneer - AUction Runner</title>
+    <title>Auctioneer - Auction Runner</title>
     <link rel="stylesheet" href="styles/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="styles/master.css" />
   </head>
@@ -24,7 +24,7 @@
         <header class="row">
           <h2 class="col-md-7" id="event-name">{Event Name Here}</h2>
           <form id="cancel-form" class="form-inline col-md-5 text-right">
-            <a id="start-event-link" href="/run-event?eid=">
+            <a id="display-event-link" href="/run-event?eid=" target="_blank">
               <button type="button" class="form-control">
                 Open Event Display
               </button>
@@ -97,6 +97,7 @@
       $(document).ready(function () {
         fetchEventDetails(function (eventDetails) {
           $("#event-name").html(eventDetails.name);
+          $("#display-event-link").attr("href", "/event-display?eid=" + eventDetails.eid);
           for (var key in eventDetails.bids) {
             $("#bid-table-empty").remove();
             var bid = eventDetails.bids[key];
@@ -106,12 +107,12 @@
             "<td>" + bid.amount + "</td>" +
             "<td><a href=\"edit-bid?eid=" + getParameterByName("eid") + "&bidID=" + bid.id + "\">Edit Details</a></td>" +
             "</tr>";
-            $("#bid-table").append(bidHTML);
+            $("#bid-table").prepend(bidHTML);
           }
           for (var key in eventDetails.participants) {
             var participant = eventDetails.participants[key];
             var participantOptionHTML = "<option value=\"" + participant.id + "\">" + participant.bidNumber + "</option>";
-            $("#bid-select-number").append(participantOptionHTML);
+            $("#bid-select-number").prepend(participantOptionHTML);
           }
         });
 

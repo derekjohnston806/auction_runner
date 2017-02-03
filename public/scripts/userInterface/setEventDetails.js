@@ -17,7 +17,7 @@ function setEventDetails(eventDetails) {
     "<td>" + participant.name + "</td>" +
     "<td>" + participant.email + "</td>" +
     "<td>" + participant.cell + "</td>" +
-    "<td>" + participant.contribution + "</td>" +
+    "<td>" + formatDollarAmount(participant.contribution) + "</td>" +
     "<td><a href=\"participant-details?eid=" + getParameterByName("eid") +"&id=" + participant.id + "\">View Details</a></td>" +
     "</tr>";
     $("#participant-table-empty").remove();

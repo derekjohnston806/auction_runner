@@ -25,6 +25,7 @@ module.exports = function (request, response) {
       newEventData.tHash = null;
       newEventData.owner = session.uid;
       newEventData.eid = admin.database().ref("events").push().key;
+      newEventData.raised = 0;
       newEventData.createdOn = Date.now();
       return admin.database().ref("events").child(newEventData.eid).set(newEventData);
     } else {

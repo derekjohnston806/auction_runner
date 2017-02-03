@@ -29,6 +29,22 @@ function handleBidSelectFormSubmit(event) {
       "<td><a href=\"edit-bid?eid=" + getParameterByName("eid") + "&bidID=" + data.bidID + "\">Edit Details</a></td>" +
       "</tr>";
       $("#bid-table").append(bidHTML);
+
+      console.log("Setting Local Storage");
+      if (!localStorage.getItem("auctioneer-bid-counter")) {
+        localStorage.setItem("auctioneer-bid-counter", 0);
+      } else {
+        localStorage.setItem("auctioneer-bid-counter", localStorage.getItem("auctioneer-bid-counter") + 1);
+      }
+      localStorage.setItem("auctioneer-fourth-bid-name", localStorage.getItem("auctioneer-third-bid-name"));
+      localStorage.setItem("auctioneer-fourth-bid-amount", localStorage.getItem("auctioneer-third-bid-amount"));
+      localStorage.setItem("auctioneer-third-bid-name", localStorage.getItem("auctioneer-second-bid-name"));
+      localStorage.setItem("auctioneer-third-bid-amount", localStorage.getItem("auctioneer-second-bid-amount"));
+      localStorage.setItem("auctioneer-second-bid-name", localStorage.getItem("auctioneer-first-bid-name"));
+      localStorage.setItem("auctioneer-second-bid-amount", localStorage.getItem("auctioneer-first-bid-amount"));
+      localStorage.setItem("auctioneer-first-bid-name", data.bidName);
+      localStorage.setItem("auctioneer-first-bid-amount", data.bidAmount);
+
     },
     error: function (xhr, textStatus, errorThrown) {
 
