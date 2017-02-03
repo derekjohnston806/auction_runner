@@ -50,5 +50,5 @@ module.exports = function (request, response) {
         response.status(500);
         response.end();
     }
-  })
+  });
 }

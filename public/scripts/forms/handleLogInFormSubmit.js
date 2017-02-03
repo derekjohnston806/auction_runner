@@ -33,7 +33,7 @@ function handleLogInFormSubmit(event) {
       url: "/authenticateUserCredentials",
       data: credentials,
       success: function (data, textStatus, xhr) {
-        console.log("User credentials authenticated successfully...");
+        console.log("User credentials authenticated successfully...", data);
         localStorage.setItem("auctioneer-hash", data.hash);
         localStorage.setItem("auctioneer-timestamp", data.timestamp);
         localStorage.setItem("auctioneer-email", data.email);

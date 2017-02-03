@@ -8,7 +8,8 @@
 */
 function setEventDetails(eventDetails) {
   $("#event-name").html(eventDetails.name);
-  console.log(eventDetails);
+  $("#new-participant-link").attr("href", "/new-participant?eid=" + getParameterByName("eid"));
+  $("#start-event-link").attr("href", "/run-event?eid=" + getParameterByName("eid"));
   for (var key in eventDetails.participants) {
     var participant = eventDetails.participants[key];
     var participantHTML = "<tr>" +

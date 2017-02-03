@@ -7,6 +7,8 @@
     - Fetch a listing of all the events and display them in the table.
 */
 function fetchEvents() {
+  console.log("tEmail:", localStorage.getItem("auctioneer-email"));
+  console.log("tHash:", localStorage.getItem("auctioneer-hash"));
   $.ajax({
     type: "POST",
     url: "events",

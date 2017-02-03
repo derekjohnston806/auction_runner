@@ -25,8 +25,9 @@ module.exports = function (request, response) {
   .then(function (session) {
     if (passwordHash.verify(credentials.password, session.hash)) {
       newSession = {
-        hash: session.hash,
-        timestamp: Date.now()
+        uid       : session.uid,
+        hash      : session.hash,
+        timestamp : Date.now()
       };
       return admin.database().ref("sessions").child(credentials.email.replace(/\./g, "_")).set(newSession);
     } else {

@@ -26,6 +26,7 @@ app.post("/newEvent", require("./routes/newEvent.route"));
 app.post("/events", require("./routes/events.route"));
 app.post("/eventDetails", require("./routes/eventDetails.route"));
 app.post("/addParticipantBulk", require("./routes/addParticipantBulk.route"));
+app.post("/newBid", require("./routes/newBid.route"));
 
 app.listen(port, function () {
   console.log("Auction runner application listening on port:", port);

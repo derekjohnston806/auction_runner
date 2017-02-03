@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auctioneer - AUction Runner</title>
+    <link rel="stylesheet" href="styles/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/master.css" />
+  </head>
+  <body>
+    <!-- CONTENT -->
+    <div class="container">
+      <header class="row">
+        <h1 class="col-md-7">Auctioneer</h1>
+        <form id="logout-form" class="form-inline col-md-5 text-right">
+          <a href="javascript:history.back()">
+            <button type="button" class="form-control">
+              Back
+            </button>
+          </a>
+        </form>
+      </header>
+      <main>
+        <header class="row">
+          <h2 class="col-md-7" id="event-name">{Event Name Here}</h2>
+          <form id="cancel-form" class="form-inline col-md-5 text-right">
+            <a id="start-event-link" href="/run-event?eid=">
+              <button type="button" class="form-control">
+                Open Event Display
+              </button>
+            </a>
+          </form>
+        </header>
+        <section class="row bid-form">
+          <form id="bid-select-form" class="form-inline">
+            <section class="form-group col-md-4 text-right">
+              <label for="bid-select-number">Bid Number</label>
+              <select id="bid-select-number" class="form-control" required="true">
+
+              </select>
+            </section>
+            <section class="form-group col-md-4 text-center">
+              <label for="bid-select-amount">Bid Amount</label>
+              <input type="text" id="bid-select-amount" class="form-control" placeholder="Bid Amount" required="true" />
+            </section>
+            <section class="form-group col-md-4 text-left">
+              <input type="submit" value="Submit Bid" class="form-control" />
+            </section>
+          </form>
+        </section>
+        <section class="row bid-form">
+          <form id="bid-name-form" class="form-inline">
+            <section class="form-group col-md-4 text-right">
+              <label for="bid-name">Bidder's Name</label>
+              <input type="text" id="bid-name" class="form-control" placeholder="Bidder's Name" />
+            </section>
+            <section class="form-group col-md-4 text-center">
+              <label for="bid-name-amount">Bid Amount</label>
+              <input type="text" id="bid-name-amount" class="form-control" placeholder="Bid Amount" required="true" />
+            </section>
+            <section class="form-group col-md-4 text-left">
+              <input type="submit" value="Submit Bid" class="form-control" />
+            </section>
+          </form>
+        </section>
+        <section class="row">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Bid Number</th>
+                <th>Bidder Name</th>
+                <th>Bid Amount</th>
+                <th>Bid Details</th>
+              </tr>
+            </thead>
+            <tbody id="bid-table">
+              <tr id="bid-table-empty">
+                <td colspan="4">
+                  <h5 class="text-center">No Bids</h5>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+      <footer>
+        <h5>&copy; 2017 J&P Innovations Inc.</h5>
+      </footer>
+    </div>
+    <!-- SCRIPTS -->
+    <script src="scripts/jquery/jquery-3.1.1.min.js"></script>
+    <script src="scripts/bootstrap/bootstrap.min.js"></script>
+    <script src="scripts/helpers/getParameterByName.js"></script>
+    <script src="scripts/fetches/fetchEventDetails.js"></script>
+    <script src="scripts/forms/handleBidSelectFormSubmit.js"></script>
+    <script>
+      $(document).ready(function () {
+        fetchEventDetails(function (eventDetails) {
+          $("#event-name").html(eventDetails.name);
+          for (var key in eventDetails.bids) {
+            $("#bid-table-empty").remove();
+            var bid = eventDetails.bids[key];
+            var bidHTML = "<tr>" +
+            "<td>" + bid.number + "</td>" +
+            "<td>" + bid.name + "</td>" +
+            "<td>" + bid.amount + "</td>" +
+            "<td><a href=\"edit-bid?eid=" + getParameterByName("eid") + "&bidID=" + bid.id + "\">Edit Details</a></td>" +
+            "</tr>";
+            $("#bid-table").append(bidHTML);
+          }
+          for (var key in eventDetails.participants) {
+            var participant = eventDetails.participants[key];
+            var participantOptionHTML = "<option value=\"" + participant.id + "\">" + participant.bidNumber + "</option>";
+            $("#bid-select-number").append(participantOptionHTML);
+          }
+        });
+
+        $("#bid-select-form").submit(handleBidSelectFormSubmit);
+      });
+    </script>
+  </body>
+</html>
