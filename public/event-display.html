@@ -76,6 +76,7 @@
     <script src="scripts/fetches/fetchEventDetails.js"></script>
     <script>
       $(document).ready(function () {
+
         fetchEventDetails(function (eventDetails) {
           $("#event-name").html(eventDetails.name);
           $("#event-goal").html(formatDollarAmount(eventDetails.goal));
@@ -87,12 +88,10 @@
 
         $(window).bind("storage", function (event) {
           console.log("Update Occured")
-
           $("#bidder-name").html(localStorage.getItem("auctioneer-first-bid-name"));
           $("#bidder-amount").html(formatDollarAmount(localStorage.getItem("auctioneer-first-bid-amount")));
-
           $("#name-modal").modal("show");
-          setTimeout(function () { $("#name-modal").modal("hide"); }, 5000);
+          setTimeout(function () { $("#name-modal").modal("hide"); }, 3000);
 
           $("#bidder-fourth-name").html(formatOptionalString(localStorage.getItem("auctioneer-fourth-bid-name")));
           $("#bidder-fourth-amount").html(formatDollarAmount(formatOptionalString(localStorage.getItem("auctioneer-fourth-bid-amount"))));

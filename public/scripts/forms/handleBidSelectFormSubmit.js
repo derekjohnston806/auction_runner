@@ -28,7 +28,7 @@ function handleBidSelectFormSubmit(event) {
       "<td>" + data.bidAmount + "</td>" +
       "<td><a href=\"edit-bid?eid=" + getParameterByName("eid") + "&bidID=" + data.bidID + "\">Edit Details</a></td>" +
       "</tr>";
-      $("#bid-table").append(bidHTML);
+      $("#bid-table").prepend(bidHTML);
 
       console.log("Setting Local Storage");
       if (!localStorage.getItem("auctioneer-bid-counter")) {

@@ -15,12 +15,13 @@ h1 {
   padding-left: 42px;
   margin-top: 0px;
   position: relative;
+  color: #dcbb7b;
   top: 18px;
 }
 
 .bid-names {
   padding-top: 21px;
-  min-height: 60vh;
+  height: 60vh;
 }
 
 .bidder-first h2 {

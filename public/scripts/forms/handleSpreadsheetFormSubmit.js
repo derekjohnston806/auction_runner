@@ -62,7 +62,7 @@ function handleSpreadsheetFormSubmit(event) {
           "<td>" + participantData[eid + "_participant_" + i].contribution + "</td>" +
           "<td><a href=\"participant-details?id=" + participantData[eid + "_participant_" + i].id + "\">View Details</a></td>" +
           "</tr>";
-          $("#participant-table-body").append(participantHTML);
+          $("#participant-table-body").prepend(participantHTML);
 
           $.ajax({ type: "POST", url: "/addParticipantBulk", data: participantData[eid + "_participant_" + i] });
         }
